@@ -18,8 +18,6 @@ const walk = (board, x, y, dx, dy) => {
   return qt;
 }
 
-const identity = x => x;
-
 export const checkWin = board => {
   for (let y = 0; y < board.length; y++) {
     for (let x = 0; x < board[y].length; x++) {

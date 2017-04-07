@@ -1,62 +1,25 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Board from './components/Board';
-import { checkWin } from './board';
-
-let initialBoard = [];
-
-for (let y = 0; y < 15; y++) {
-  initialBoard.push([]);
-  for (let x = 0; x < 15; x++) {
-    initialBoard[y][x] = { type: 'empty', hover: null };
-  }
-}
+import * as actionsCreators from './actionsCreators';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      board: initialBoard,
-      currentPlayer: 'black',
-      win: null
-    };
-  }
-
-  update(x, y, diff) {
-    const board = _.cloneDeep(this.state.board);
-    board[y][x] = {
-      ...board[y][x],
-      ...diff
-    };
-
-    this.setState({ board });
-  }
-
   addItem(x, y) {
-    const player = this.state.currentPlayer;
-    const board = _.cloneDeep(this.state.board);
-    board[y][x] = {
-      ...board[y][x],
-      type: this.state.currentPlayer
-    };
-
-    this.setState({
-      board,
-      currentPlayer: player === 'black' ? 'white' : 'black',
-      win: checkWin(board)
-    });
+    this.props.actions.addPiece(x, y);
   }
 
   onHover(x, y) {
-    this.update(x, y, { hover: this.state.currentPlayer });
+    this.props.actions.hover(x, y);
   }
 
   onOut(x, y) {
-    this.update(x, y, { hover: null });
+    this.props.actions.unhover(x, y);
   }
 
   render() {
-    const { board } = this.state;
+    const { board } = this.props;
     return (
       <Board board={board} addItem={this.addItem.bind(this)}
         onHover={this.onHover.bind(this)} onOut={this.onOut.bind(this)} />
@@ -64,4 +27,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ board }) => ({
+  board
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(actionsCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
