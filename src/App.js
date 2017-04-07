@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import Board from './components/Board';
+import { checkWin } from './board';
 
 let initialBoard = [];
 
@@ -41,7 +42,8 @@ class App extends Component {
 
     this.setState({
       board,
-      currentPlayer: player === 'black' ? 'white' : 'black'
+      currentPlayer: player === 'black' ? 'white' : 'black',
+      win: checkWin(board)
     });
   }
 
