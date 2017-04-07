@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Board from './components/Board';
-import * as actionsCreators from './actionsCreators';
+import * as actionCreators from './actionCreators';
 
 class App extends Component {
   addItem(x, y) {
@@ -32,7 +32,7 @@ const mapStateToProps = ({ board }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionsCreators, dispatch)
+  actions: bindActionCreators(actionCreators, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
