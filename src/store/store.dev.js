@@ -2,9 +2,7 @@
 
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
-import rootReducer from './reducer';
-
-import type { State } from './types';
+import rootReducer from '../reducer';
 
 export const configureStore = () => createStore(
   rootReducer,
