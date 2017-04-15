@@ -29,7 +29,7 @@ export const checkWin = (board: Board): ?Player => {
         continue;
       }
 
-      const player = board[y][x] === 'black' ? 'black' : 'white';
+      const player = board[y][x].type === 'black' ? 'black' : 'white';
 
       const horizontal = walk(board, x, y, -1, 0) + 1 + walk(board, x, y, 1, 0);
       if (horizontal >= 5) {
