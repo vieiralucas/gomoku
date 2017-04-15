@@ -1,6 +1,6 @@
 // @flow
 
-import type { Cell, Player } from './types';
+import type { Board, Player } from './types';
 
 const walk = (board, x, y, dx, dy) => {
   const type = board[y][x].type;
@@ -20,9 +20,9 @@ const walk = (board, x, y, dx, dy) => {
   }
 
   return qt;
-}
+};
 
-export const checkWin = (board: Array<Array<Cell>>): ?Player => {
+export const checkWin = (board: Board): ?Player => {
   for (let y = 0; y < board.length; y++) {
     for (let x = 0; x < board[y].length; x++) {
       if (board[y][x].type === 'empty') {
