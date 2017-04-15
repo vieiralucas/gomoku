@@ -1,6 +1,10 @@
+// @flow
+
 import _ from 'lodash';
 import { checkWin } from './board';
 import { HOVER, UNHOVER, ADD_PIECE } from './actions';
+
+import type { State } from './types';
 
 let initialBoard = [];
 
@@ -27,7 +31,7 @@ const update = (b, x, y, diff) => {
   return board;
 };
 
-const addPiece = (state, action) => {
+const addPiece = (state: State, action): State => {
   const player = state.currentPlayer;
   const diff = {
     type: player
@@ -41,7 +45,7 @@ const addPiece = (state, action) => {
   return { ...state, board, currentPlayer, win };
 };
 
-const hover = (state, action) => {
+const hover = (state: State, action): State => {
   const { x, y } = action;
   const diff = {
     hover: state.currentPlayer
@@ -52,7 +56,7 @@ const hover = (state, action) => {
   return { ...state, board };
 };
 
-const unhover = (state, action) => {
+const unhover = (state: State, action): State => {
   const { x, y } = action;
   const diff = {
     hover: null
@@ -62,7 +66,7 @@ const unhover = (state, action) => {
   return { ...state, board };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: State = initialState, action: Object): State => {
   switch (action.type) {
     case ADD_PIECE:
       return addPiece(state, action);

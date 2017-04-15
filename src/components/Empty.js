@@ -1,15 +1,19 @@
+// @flow
+
 import React from 'react';
+import type { Player } from '../types';
 
 const outerStyle = {
   display: 'inline-block'
 };
 
-const Empty = ({ x, y, hover, onClick, onHover, onOut }) => {
+const Empty = ({ x, y, hover, onClick, onHover, onOut }: EmptyProps) => {
   const innerStyle = {
     background: '#000',
     width: '6px',
     height: '6px',
-    margin: '22px'
+    margin: '22px',
+    borderRadius: '0'
   };
 
 
@@ -38,13 +42,13 @@ const Empty = ({ x, y, hover, onClick, onHover, onOut }) => {
   );
 };
 
-Empty.propTypes = {
-  x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired,
-  hover: React.PropTypes.string,
-  onClick: React.PropTypes.func.isRequired,
-  onHover: React.PropTypes.func.isRequired,
-  onOut: React.PropTypes.func.isRequired
+type EmptyProps = {
+  x: number,
+  y: number,
+  hover: ?Player,
+  onClick: (x: number, y: number) => void,
+  onHover: (x: number, y: number) => void,
+  onOut: (x: number, y: number) => void
 };
 
 export default Empty;

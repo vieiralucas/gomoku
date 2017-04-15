@@ -1,17 +1,21 @@
+// @flow
+
 import reducer from './reducer';
 import * as actionCreators from './actionCreators';
 
-const w = () => ({
+import type { Cell } from './types';
+
+const w = (): Cell => ({
   type: 'white',
   hover: null
 });
 
-const b = () => ({
+const b = (): Cell => ({
   type: 'black',
   hover: null
 });
 
-const e = () => ({
+const e = (): Cell => ({
   type: 'empty',
   hover: null
 });

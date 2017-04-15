@@ -1,3 +1,5 @@
+// @flow
+
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -5,6 +7,9 @@ import { bindActionCreators } from 'redux';
 import Board from './components/Board';
 import Stats from './components/Stats';
 import * as actionCreators from './actionCreators';
+
+import type { Action } from './types';
+import type { Dispatch } from 'redux';
 
 const containerStyle = {
   display: 'flex',
@@ -39,14 +44,14 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ board, currentPlayer, win }) => ({
-  board,
-  currentPlayer,
-  win
+const mapStateToProps = state => ({
+  ...state
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(App);

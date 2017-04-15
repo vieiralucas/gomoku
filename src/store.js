@@ -1,9 +1,12 @@
+// @flow
+
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
 import rootReducer from './reducer';
 
-export const configureStore = preloadedState => createStore(
+import type { State } from './types';
+
+export const configureStore = () => createStore(
   rootReducer,
-  preloadedState,
   applyMiddleware(logger)
 );

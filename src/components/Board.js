@@ -1,5 +1,8 @@
+// @flow
+
 import React from 'react';
 import Row from './Row';
+import type { Cell } from '../types';
 
 const boardStyle = {
   border: '1px solid #eee',
@@ -7,7 +10,7 @@ const boardStyle = {
   maxWidth: '750px'
 };
 
-const Board = ({ board, addItem, onHover, onOut }) => {
+const Board = ({ board, addItem, onHover, onOut }: BoardProps) => {
   const rows = board
     .map((row, i) =>
       <Row row={row} y={i} key={i} 
@@ -21,11 +24,11 @@ const Board = ({ board, addItem, onHover, onOut }) => {
   );
 };
 
-Board.propTypes = {
-  board: React.PropTypes.array,
-  addItem: React.PropTypes.func.isRequired,
-  onHover: React.PropTypes.func.isRequired,
-  onOut: React.PropTypes.func.isRequired
+type BoardProps = {
+  board: Array<Array<Cell>>,
+  addItem: (x: number, y: number) => void,
+  onHover: (x: number, y: number) => void,
+  onOut: (x: number, y: number) => void
 };
 
 export default Board;

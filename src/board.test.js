@@ -1,15 +1,20 @@
+// @flow
+
 import * as board from './board';
 
 const w = () => ({
-  type: 'white'
+  type: 'white',
+  hover: null
 });
 
 const b = () => ({
-  type: 'black'
+  type: 'black',
+  hover: null
 });
 
 const e = () => ({
-  type: 'empty'
+  type: 'empty',
+  hover: null
 });
 
 describe('.checkWin', () => {
